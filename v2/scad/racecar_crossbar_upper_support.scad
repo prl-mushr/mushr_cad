@@ -2,7 +2,7 @@ include <../../misc/racecar_global_utils.scad>
 
 rcus_length = 9.4;
 rcus_width = 25.0;
-rcus_height = 20;
+rcus_height = 24.5;
 
 rcus_knub_x_from_top = 4.5;
 
