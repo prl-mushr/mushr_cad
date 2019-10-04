@@ -11,7 +11,7 @@ rd435_back_length = 25.0;
 rd435_back_width = 90.0;
 rd435_back_height = 1.0;
 
-rd435_wrt_rcb_x_offset = rff_wrt_rcb_x_offset+ rfcc_camera_mount_screw_x_offset + rfcc_camera_mount_screw_height/2.0+ rd435_length/2.0-1.5;
+rd435_wrt_rcb_x_offset = rff_wrt_rcb_x_offset+rfcct265p_base_x_offset+rfcct265p_base_length/2.0+rd435_length/2.0;//+ rfcc_camera_mount_screw_x_offset + rfcc_camera_mount_screw_height/2.0+ rd435_length/2.0-1.5;
 rd435_wrt_rcb_y_offset = rff_wrt_rcb_y_offset+0.5*(rfcc_camera_mount_screw_left_y_offset+rfcc_camera_mount_screw_right_y_offset);
 rd435_wrt_rcb_z_offset = rff_wrt_rcb_z_offset + rfcc_camera_mount_screw_z_offset;
 

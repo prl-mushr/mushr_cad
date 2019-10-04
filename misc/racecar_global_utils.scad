@@ -1,5 +1,5 @@
 _print_config = true;
-_fn_val = 15;
+_fn_val = 100;
 
 _wall_thickness = 3.0;
 _m3_nut_height = 3.0;
@@ -328,4 +328,21 @@ module _comp_spring(type, l = 0) {
 
     _coil(r1 = (spring_od(type) - spring_gauge(type)) / 2, r2 = spring_gauge(type) / 2, h = l, twists = spring_coils(type));
 
+}
+
+module _quarter_sphere(radius){
+    translate([-radius/2.0,-radius/2.0,-radius/2.0]) {
+        difference() {
+            sphere(radius, $fn=_fn_val);
+            translate([0,0,-radius/2.0]) {
+                cube([2*radius,2*radius,radius], true);
+            }
+            translate([0,-radius/2.0,radius/2.0]) {
+                cube([2*radius,radius,radius], true);
+            }
+            translate([-radius/2.0,radius/2.0,radius/2.0]) {
+                cube([radius, radius, radius], true);
+            }
+        }
+    }
 }

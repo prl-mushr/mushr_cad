@@ -30,20 +30,23 @@ include <racecar_jetson_nano.scad>
 $include_rd435 = false;
 include <racecar_d435.scad>
 
+$include_rt265 = false;
+include <racecar_t265.scad>
+
 $include_ry = false;
 include <racecar_ydlidar.scad>
 
 draw_racecar_crossbar_body = false;
-draw_racecar_back_foundation = true;
-draw_racecar_front_foundation = true;
-draw_racecar_upper_left_foundation_support = true;
-draw_racecar_lower_left_foundation_support = true;
-draw_racecar_lower_right_foundation_support = true;
-draw_racecar_servo_cage = true;
-draw_racecar_crossbar_upper_support = true;
-draw_racecar_crossbar_bottom_support = true;
+draw_racecar_back_foundation = false;
+draw_racecar_front_foundation = false;
+draw_racecar_upper_left_foundation_support = false;
+draw_racecar_lower_left_foundation_support = false;
+draw_racecar_lower_right_foundation_support = false;
+draw_racecar_servo_cage = false;
+draw_racecar_crossbar_upper_support = false;
+draw_racecar_crossbar_bottom_support = false;
 draw_racecar_back_cover_left_side = true;
-draw_racecar_back_cover_right_side = true;
+draw_racecar_back_cover_right_side = false;
 draw_racecar_back_cover_top = true;
 draw_racecar_front_cover_back_left_side = true;
 draw_racecar_front_cover_front_left_side = true;
@@ -71,14 +74,18 @@ draw_racecar_battery_foundation_left_sticker = false;
 draw_racecar_battery_foundation_right = false;
 draw_racecar_battery_foundation_right_sticker = false;
 draw_racecar_jetson_nano = false;
-draw_racecar_d435 = false;
+draw_racecar_d435 = true;
 draw_racecar_d435_screen = false;
-draw_racecar_ydlidar_top = false;
-draw_racecar_ydlidar_motor = false;
-draw_racecar_ydlidar_mount = false;
+draw_racecar_ydlidar_top = true;
+draw_racecar_ydlidar_motor = true;
+draw_racecar_ydlidar_mount = true;
 draw_racecar_back_cover_left_side_image = false;
 draw_racecar_back_cover_right_side_image = false;
 draw_racecar_front_cover_center_number = false;
+draw_racecar_front_cover_left_text = false;
+draw_racecar_front_cover_right_text = false;
+draw_racecar_front_cover_center_t265_plate = true;
+draw_racecar_t265 = true;
 
 RacecarAll();
 
@@ -202,6 +209,18 @@ module RacecarAll() {
         translate([rff_wrt_rcb_x_offset, rff_wrt_rcb_y_offset, rff_wrt_rcb_z_offset]) {
             RacecarFrontCoverCenterNumber();
         }  
+    }    
+    
+    if(draw_racecar_front_cover_left_text) {
+        translate([rff_wrt_rcb_x_offset, rff_wrt_rcb_y_offset, rff_wrt_rcb_z_offset]) {
+            RacecarFrontCoverBackLeftSideText();
+        }        
+    }
+    
+    if(draw_racecar_front_cover_right_text) {
+        translate([rff_wrt_rcb_x_offset, rff_wrt_rcb_y_offset, rff_wrt_rcb_z_offset]) {
+            RacecarFrontCoverBackRightSideText();
+        }        
     }    
     
     if(draw_racecar_chassis) {
@@ -363,6 +382,16 @@ module RacecarAll() {
             RacecarD435();
         }
     }
+
+     echo("T2655: ", 
+        rt265_wrt_rcb_x_offset, 
+        rt265_wrt_rcb_y_offset,
+        rt265_wrt_rcb_z_offset);    
+    if(draw_racecar_t265) {
+        translate([rt265_wrt_rcb_x_offset, rt265_wrt_rcb_y_offset, rt265_wrt_rcb_z_offset]) {
+            RacecarT265();
+        }
+    }    
     
     if(draw_racecar_d435_screen) {
         translate([rd435_wrt_rcb_x_offset, rd435_wrt_rcb_y_offset, rd435_wrt_rcb_z_offset]) {
@@ -390,5 +419,11 @@ module RacecarAll() {
             RacecarYDLidarMount();
         }
     }    
+    
+    if(draw_racecar_front_cover_center_t265_plate) {
+        translate([rff_wrt_rcb_x_offset, rff_wrt_rcb_y_offset, rff_wrt_rcb_z_offset]) {
+            RacecarFrontCoverCenterT265Plate();
+        }
+    }
     
 }
