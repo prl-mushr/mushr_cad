@@ -77,7 +77,7 @@ rfcc_camera_cutout_back_left_top_z = rfcc_rbct_left_top_z + rfcc_camera_cutout_e
 
 rfcc_camera_cutout_back_left_bottom_x = rfcc_rbct_left_bottom_x + rfcc_camera_cutout_extra_back_x;
 rfcc_camera_cutout_back_left_bottom_y = rfcc_rbct_left_bottom_y + rfcc_camera_cutout_extra_back_x*rfcc_left_xy_slope;
-rfcc_camera_cutout_back_left_bottom_z = rfcc_rbct_left_bottom_z + rfcc_camera_cutout_extra_back_x*rfcc_bottom_xz_slope;   
+rfcc_camera_cutout_back_left_bottom_z = rfcc_rbct_left_bottom_z + rfcc_camera_cutout_extra_back_x*rfcc_bottom_xz_slope-0.01;   
 
 rfcc_camera_cutout_back_right_top_x = rfcc_rbct_right_top_x + rfcc_camera_cutout_extra_back_x;
 rfcc_camera_cutout_back_right_top_y = rfcc_rbct_right_top_y + rfcc_camera_cutout_extra_back_x*rfcc_right_xy_slope;
@@ -85,7 +85,7 @@ rfcc_camera_cutout_back_right_top_z = rfcc_rbct_right_top_z + rfcc_camera_cutout
 
 rfcc_camera_cutout_back_right_bottom_x = rfcc_rbct_right_bottom_x + rfcc_camera_cutout_extra_back_x;
 rfcc_camera_cutout_back_right_bottom_y = rfcc_rbct_right_bottom_y + rfcc_camera_cutout_extra_back_x*rfcc_right_xy_slope;
-rfcc_camera_cutout_back_right_bottom_z = rfcc_rbct_right_bottom_z + rfcc_camera_cutout_extra_back_x*rfcc_bottom_xz_slope;
+rfcc_camera_cutout_back_right_bottom_z = rfcc_rbct_right_bottom_z + rfcc_camera_cutout_extra_back_x*rfcc_bottom_xz_slope-0.01;
 
 rfcc_camera_mount_extra_x = -_wall_thickness + rfcc_camera_cutout_extra_back_x;
 
