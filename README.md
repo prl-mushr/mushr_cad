@@ -1,6 +1,8 @@
 # mushr_cad
 This repo contains all CAD Files for MuSHR. Currently, all design files are written with OpenSCAD. Blender has also been used to synthesize individual parts into complete, colored models.
 
+To modify the husky logo to something of your choice see [this tutorial](https://mushr.io/hardware/logo_modification/).
+
 Note that **all necessary parts for building the MuSHR Nano Racecar can be found in ./v3/stl/.** All files in that directory should be printed exactly once, except racecar_cover_image should be printed twice. We recommend that racecar_cover_image and racecar_cover_number be printed in a different color than all of the other parts.
 
 **chassis:** Design files for the chassis
