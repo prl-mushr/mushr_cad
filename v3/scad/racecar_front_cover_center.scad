@@ -117,6 +117,18 @@ rfcc_t265_mount_screw_left_y_offset = (rfcc_camera_mount_left_top_y+rfcc_camera_
 rfcc_t265_mount_screw_right_y_offset = rfcc_t265_mount_screw_left_y_offset - 50.0;
 rfcc_t265_mount_screw_z_offset = rfcc_camera_cutout_front_right_top_z+14.5;
 
+rfcc_d455_mount_screw_height = rfcc_camera_mount_screw_height;
+rfcc_d455_mount_screw_x_offset = rfcc_camera_mount_screw_x_offset;
+rfcc_d455_mount_screw_left_y_offset = (rfcc_camera_mount_left_top_y+rfcc_camera_mount_right_top_y)/2.0 + 95.0/2.0;
+rfcc_d455_mount_screw_right_y_offset = (rfcc_camera_mount_left_top_y+rfcc_camera_mount_right_top_y)/2.0 - 95.0/2.0;
+rfcc_d455_mount_screw_z_offset = rfcc_camera_cutout_front_right_top_z+29.0/2+2;
+
+rfcc_d455_head_screw_height = (rfcc_d455_mount_screw_x_offset+rfcc_d455_mount_screw_height/2.0)-rfcc_rbct_left_bottom_x;
+rfcc_d455_head_screw_x_offset = rfcc_camera_mount_left_top_x - rfcc_d455_head_screw_height/2.0+0.7;
+rfcc_d455_head_screw_left_y_offset = rfcc_d455_mount_screw_left_y_offset;
+rfcc_d455_head_screw_right_y_offset = rfcc_d455_mount_screw_right_y_offset;
+rfcc_d455_head_screw_z_offset = rfcc_d455_mount_screw_z_offset;
+
 rfcc_number_slope = (rfcc_rbct_left_top_z-rfcc_rff_cover_front_left_z)/(rfcc_rbct_left_top_x-rfcc_rff_cover_front_left_x);
 rfcc_number_x_rotation = -atan(rfcc_number_slope);
 rfcc_number_y_rotation = 0.0;
@@ -310,7 +322,31 @@ module RacecarFrontCoverCenter() {
                 cylinder(rfcc_t265_mount_screw_height, _m3_screw_shaft_radius, _m3_screw_shaft_radius, true, $fn=_fn_val);
             }
         }        
-        
+
+        translate([rfcc_d455_mount_screw_x_offset, rfcc_d455_mount_screw_right_y_offset, rfcc_d455_mount_screw_z_offset]) {
+            rotate([0,90,0]) {
+                cylinder(rfcc_d455_mount_screw_height, _m4_screw_shaft_radius, _m4_screw_shaft_radius, true, $fn=_fn_val);
+            }
+        }
+       
+        translate([rfcc_d455_mount_screw_x_offset, rfcc_d455_mount_screw_left_y_offset, rfcc_d455_mount_screw_z_offset]) {
+            rotate([0,90,0]) {
+                cylinder(rfcc_d455_mount_screw_height, _m4_screw_shaft_radius, _m4_screw_shaft_radius, true, $fn=_fn_val);
+            }
+        }      
+
+        translate([rfcc_d455_head_screw_x_offset, rfcc_d455_head_screw_right_y_offset, rfcc_d455_head_screw_z_offset]) {
+            rotate([0,90,0]) {
+                cylinder(rfcc_d455_head_screw_height, 7.5/2, 7.5/2, true, $fn=_fn_val);
+            }
+        }
+       
+        translate([rfcc_d455_head_screw_x_offset, rfcc_d455_head_screw_left_y_offset, rfcc_d455_head_screw_z_offset]) {
+            rotate([0,90,0]) {
+                cylinder(rfcc_d455_head_screw_height, 7.5/2, 7.5/2, true, $fn=_fn_val);
+            }
+        }       
+ 
         translate([0,10,-15.0]) {
             RacecarFrontCoverCenterUSB();
         }

@@ -58,15 +58,6 @@ module RacecarFrontCoverBackLeftSide() {
     rfcbls_wall_x_offset = (rfcfls_cover_left_x+rfcbls_cover_left_x)/2.0;
     rfcbls_wall_y_offset = (rfcbls_cover_left_y+rfcbls_cover_right_y)/2.0;
     rfcbls_wall_z_offset =  rff_base_height/2.0 + rff_side_wall_height/2.0;
-
-    polyhedron(points=[
-    [rfcbls_fill_back_right_top_x, rfcbls_fill_back_right_top_y, rfcbls_fill_back_right_top_z], // 0
-    [rfcbls_fill_back_left_bottom_x, rfcbls_fill_back_left_bottom_y, rfcbls_fill_back_left_bottom_z], // 1
-    [rfcbls_fill_back_right_bottom_x, rfcbls_fill_back_right_bottom_y, rfcbls_fill_back_right_bottom_z], // 2 
-    [rfcbls_fill_front_left_bottom_x, rfcbls_fill_front_left_bottom_y, rfcbls_fill_front_left_bottom_z], // 3
-    [rfcbls_fill_front_right_bottom_x, rfcbls_fill_front_right_bottom_y, rfcbls_fill_front_right_bottom_z], // 4
-    [rfcbls_fill_front_right_top_x, rfcbls_fill_front_right_top_y, rfcbls_fill_front_right_top_z] // 5
-    ], faces=[[0,2,1], [5,3,4], [0,1,3,5],[0,5,4,2], [1,2,4,3]]);
     
     difference() {
         union() {
@@ -83,8 +74,18 @@ module RacecarFrontCoverBackLeftSide() {
             translate([rfcbls_wall_x_offset,rfcbls_wall_y_offset,rfcbls_wall_z_offset]) {
                 cube([rfcbls_wall_length, rfcbls_wall_width, rfcbls_wall_height], true);
             }
+ 
+            polyhedron(points=[
+            [rfcbls_fill_back_right_top_x, rfcbls_fill_back_right_top_y, rfcbls_fill_back_right_top_z], // 0
+            [rfcbls_fill_back_left_bottom_x, rfcbls_fill_back_left_bottom_y, rfcbls_fill_back_left_bottom_z], // 1
+            [rfcbls_fill_back_right_bottom_x, rfcbls_fill_back_right_bottom_y, rfcbls_fill_back_right_bottom_z], // 2 
+            [rfcbls_fill_front_left_bottom_x, rfcbls_fill_front_left_bottom_y, rfcbls_fill_front_left_bottom_z], // 3
+            [rfcbls_fill_front_right_bottom_x, rfcbls_fill_front_right_bottom_y, rfcbls_fill_front_right_bottom_z], // 4
+            [rfcbls_fill_front_right_top_x, rfcbls_fill_front_right_top_y, rfcbls_fill_front_right_top_z] // 5
+            ], faces=[[0,2,1], [5,3,4], [0,1,3,5],[0,5,4,2], [1,2,4,3]]);
             
-        }      
+        }
+        
         
         translate([rff_side_screw_front_x_offset, rfcbls_wall_y_offset, rfcbls_wall_z_offset]) {
             scale([1,1.001,1]) {
@@ -101,7 +102,14 @@ module RacecarFrontCoverBackLeftSide() {
             }
         }        
         RacecarFrontCoverD455Removal();
-        RacecarFrontCoverBackLeftSideText();        
+        RacecarFrontCoverBackLeftSideText();
+       
+        translate([rfcc_d455_head_screw_x_offset, rfcc_d455_head_screw_left_y_offset, rfcc_d455_head_screw_z_offset]) {
+            rotate([0,90,0]) {
+                cylinder(rfcc_d455_head_screw_height, 7.5/2, 7.5/2, true, $fn=_fn_val);
+            }
+        } 
+        
     }
 }
 

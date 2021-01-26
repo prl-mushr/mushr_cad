@@ -101,6 +101,12 @@ module RacecarFrontCoverBackRightSide() {
         RacecarFrontCoverCenterUSB();
         RacecarFrontCoverBackRightSideText();
         RacecarFrontCoverD455Removal();
+        translate([rfcc_d455_head_screw_x_offset, rfcc_d455_head_screw_right_y_offset, rfcc_d455_head_screw_z_offset]) {
+            rotate([0,90,0]) {
+                cylinder(rfcc_d455_head_screw_height, 7.5/2, 7.5/2, true, $fn=_fn_val);
+            }
+        }
+              
     }
     
 }
