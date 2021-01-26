@@ -48,5 +48,6 @@ module RacecarFrontCoverFrontLeftSide() {
             [rfcfls_wall_right_x,rfcfls_wall_right_y,rfcfls_wall_right_z] //7
             ], faces=[[0,1,3,2],[0,2,6,4],[1,5,7,3],[2,3,7,6],[1,0,4,5],[5,4,6,7]]);
         }
+        RacecarFrontCoverD455Removal();
     }
 }

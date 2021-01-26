@@ -128,7 +128,7 @@ rfcc_number_y_offset = (rfcc_rbct_left_top_y+rfcc_rbct_right_top_y)/2.0;
 rfcc_number_z_offset = rfcc_rbct_left_top_z-racecar_cover_number_height/2.0+rfcc_number_extra_z;    
 
 rfcct265p_base_length = 8.0;
-rfcct265p_base_width = -2*rfcc_t265_mount_screw_right_y_offset + 2*_m3_screw_head_radius+4*_wall_thickness;
+rfcct265p_base_width = -2*rfcc_t265_mount_screw_right_y_offset + 2*_m3_screw_head_radius+4*_wall_thickness;//+20;
 rfcct265p_base_height = rfcc_rbct_left_top_z-(rfcc_t265_mount_screw_z_offset-_m3_screw_shaft_radius- _wall_thickness)+24.5/2.0+_m3_screw_shaft_radius+_wall_thickness;
 rfcct265p_base_x_offset = rfcc_camera_cutout_back_left_top_x+ rfcct265p_base_length/2.0;
 rfcct265p_base_y_offset = (rfcc_rbct_left_top_y + rfcc_rbct_right_top_y)/2.0;
@@ -136,6 +136,19 @@ rfcct265p_base_z_offset = rfcc_t265_mount_screw_z_offset-_m3_screw_shaft_radius-
 
 rfcct265p_screw_z_offset = rfcct265p_base_z_offset + rfcct265p_base_height/2.0 - _wall_thickness - _m3_screw_shaft_radius;
 
+/*
+rfcct265p_extra_length = rfcct265p_base_length;
+rfcct265p_extra_width = rfcct265p_base_width+35;
+rfcct265p_extra_height = 15.0;
+rfcct265p_extra_x_offset = rfcct265p_base_x_offset;
+rfcct265p_extra_y_offset = rfcct265p_base_y_offset;
+rfcct265p_extra_z_offset = rfcct265p_base_z_offset + rfcct265p_base_height/2.0+rfcct265p_extra_height/2.0;
+
+rfcct265p_extra_screw_x_offset = rfcct265p_extra_x_offset;
+rfcct265p_extra_screw_left_y_offset = rfcct265p_extra_y_offset + 45.0/2 - 17.5 - 15;
+rfcct265p_extra_screw_right_y_offset = rfcct265p_extra_screw_left_y_offset - 45.0;
+rfcct265p_extra_screw_z_offset = rfcct265p_extra_z_offset;
+*/
 if ($include_rfcc==undef) {
     RacecarFrontCoverCenter();
     RacecarFrontCoverCenterT265Plate();
@@ -170,6 +183,19 @@ module RacecarFrontCoverCenterUSB() {
     rfcc_usb_height = 30.0;
     translate([rfcc_camera_cutout_back_right_top_x+rfcc_usb_length/2.0,rfcc_camera_cutout_front_right_top_y-rfcc_usb_width/2.0,rfcc_camera_cutout_front_right_top_z+rfcc_usb_height/2.0]) {
         cube([rfcc_usb_length,rfcc_usb_width,rfcc_usb_height], true);
+    }
+}
+
+module RacecarFrontCoverD455Removal() {
+    rfc_d455r_length = rfcc_camera_cutout_front_right_top_x - rfcc_camera_cutout_back_right_top_x;
+    rfc_d455r_width = rff_width;
+    rfc_d455r_height = rfcc_camera_cutout_back_right_top_z -rfcc_camera_cutout_front_right_bottom_z;
+    rfc_d455r_x_offset = 0.5*(rfcc_camera_cutout_back_right_top_x + rfcc_camera_cutout_front_right_top_x);
+    rfc_d455r_y_offset = 0.5*(rfcc_camera_cutout_back_left_bottom_y+rfcc_camera_cutout_back_right_bottom_y);
+    rfc_d455r_z_offset = rfcc_camera_cutout_front_right_top_z+rfc_d455r_height/2.0;
+    
+    translate([rfc_d455r_x_offset, rfc_d455r_y_offset, rfc_d455r_z_offset]) {
+        cube([rfc_d455r_length, rfc_d455r_width, rfc_d455r_height], true);
     }
 }
 
@@ -303,8 +329,15 @@ module RacecarFrontCoverCenterNumber() {
 module RacecarFrontCoverCenterT265Plate() {
     
     difference() {
-        translate([rfcct265p_base_x_offset, rfcct265p_base_y_offset, rfcct265p_base_z_offset]) {
-            cube([rfcct265p_base_length, rfcct265p_base_width, rfcct265p_base_height], true);
+        union() {
+            translate([rfcct265p_base_x_offset, rfcct265p_base_y_offset, rfcct265p_base_z_offset]) {
+                cube([rfcct265p_base_length, rfcct265p_base_width, rfcct265p_base_height], true);
+            }
+            /*
+            translate([rfcct265p_extra_x_offset,rfcct265p_extra_y_offset,rfcct265p_extra_z_offset,]){
+                cube([rfcct265p_extra_length,rfcct265p_extra_width,rfcct265p_extra_height], true);
+            }
+            */
         }
         translate([rfcct265p_base_x_offset,rfcc_t265_mount_screw_left_y_offset,rfcc_t265_mount_screw_z_offset]) {
             rotate([0,90,0]) {
@@ -346,6 +379,18 @@ module RacecarFrontCoverCenterT265Plate() {
             rotate([0,90,0]) {
                 cylinder(rfcct265p_base_length, _m3_screw_shaft_radius, _m3_screw_shaft_radius, true, $fn=_fn_val);
             }
-        }        
+        }  
+        /*
+        translate([rfcct265p_extra_screw_x_offset,rfcct265p_extra_screw_left_y_offset,rfcct265p_extra_screw_z_offset]) {
+            rotate([0,90,0]) {
+                cylinder(rfcct265p_base_length, _m3_screw_shaft_radius, _m3_screw_shaft_radius, true, $fn=_fn_val);
+            }
+        }
+        translate([rfcct265p_extra_screw_x_offset,rfcct265p_extra_screw_right_y_offset,rfcct265p_extra_screw_z_offset]) {
+            rotate([0,90,0]) {
+                cylinder(rfcct265p_base_length, _m3_screw_shaft_radius, _m3_screw_shaft_radius, true, $fn=_fn_val);
+            }
+        } 
+        */      
     }
 }

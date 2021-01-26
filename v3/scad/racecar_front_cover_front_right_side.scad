@@ -51,5 +51,6 @@ module RacecarFrontCoverFrontRightSide() {
             
         }
         RacecarFrontCoverCenterUSB();
+        RacecarFrontCoverD455Removal();
     }
 }

@@ -21,6 +21,31 @@ rfcbls_text_x_offset = rfcbls_cover_left_x+rff_side_wall_length/2.0-8;
 rfcbls_text_y_offset = rfcbls_cover_left_y+rfcbls_text_extra_y;
 rfcbls_text_z_offset = rfcbls_cover_left_z+rfcbls_text_extra_z; 
 
+rfcbls_fill_back_right_top_x = rfcc_camera_mount_left_top_x;
+rfcbls_fill_back_right_top_y = rfcc_camera_mount_left_top_y;
+rfcbls_fill_back_right_top_z = rfcc_camera_cutout_back_left_top_z;
+
+rfcbls_fill_back_left_bottom_x = rfcc_camera_mount_left_bottom_x;
+rfcbls_fill_back_left_bottom_z = rfcc_camera_mount_left_bottom_z;
+rfcbls_fill_back_left_bottom_y = rfcbls_fill_back_right_top_y+((rfcc_rbct_left_top_y-rfcbls_cover_left_y)/(rfcc_rbct_left_top_z-rfcbls_cover_left_z))*(rfcbls_fill_back_left_bottom_z-rfcbls_fill_back_right_top_z);
+
+rfcbls_fill_back_right_bottom_x = rfcc_camera_mount_left_bottom_x;
+rfcbls_fill_back_right_bottom_y = rfcc_camera_mount_left_bottom_y-3;
+rfcbls_fill_back_right_bottom_z = rfcc_camera_mount_left_bottom_z;
+
+rfcbls_fill_front_left_bottom_x = rfcc_camera_cutout_back_left_top_x;
+rfcbls_fill_front_left_bottom_y = rfcbls_fill_back_left_bottom_y;
+rfcbls_fill_front_left_bottom_z = rfcbls_fill_back_left_bottom_z;
+
+rfcbls_fill_front_right_bottom_x = rfcbls_fill_front_left_bottom_x;
+rfcbls_fill_front_right_bottom_y = rfcc_camera_cutout_back_left_top_y-3;
+rfcbls_fill_front_right_bottom_z = rfcbls_fill_front_left_bottom_z;
+
+rfcbls_fill_front_right_top_x = rfcc_camera_cutout_back_left_top_x;
+rfcbls_fill_front_right_top_y = rfcbls_fill_back_right_top_y;
+rfcbls_fill_front_right_top_z = rfcbls_fill_back_right_top_z;
+
+
 if ($include_rfcbls==undef) {
     RacecarFrontCoverBackLeftSide();
 }
@@ -33,9 +58,19 @@ module RacecarFrontCoverBackLeftSide() {
     rfcbls_wall_x_offset = (rfcfls_cover_left_x+rfcbls_cover_left_x)/2.0;
     rfcbls_wall_y_offset = (rfcbls_cover_left_y+rfcbls_cover_right_y)/2.0;
     rfcbls_wall_z_offset =  rff_base_height/2.0 + rff_side_wall_height/2.0;
+
+    polyhedron(points=[
+    [rfcbls_fill_back_right_top_x, rfcbls_fill_back_right_top_y, rfcbls_fill_back_right_top_z], // 0
+    [rfcbls_fill_back_left_bottom_x, rfcbls_fill_back_left_bottom_y, rfcbls_fill_back_left_bottom_z], // 1
+    [rfcbls_fill_back_right_bottom_x, rfcbls_fill_back_right_bottom_y, rfcbls_fill_back_right_bottom_z], // 2 
+    [rfcbls_fill_front_left_bottom_x, rfcbls_fill_front_left_bottom_y, rfcbls_fill_front_left_bottom_z], // 3
+    [rfcbls_fill_front_right_bottom_x, rfcbls_fill_front_right_bottom_y, rfcbls_fill_front_right_bottom_z], // 4
+    [rfcbls_fill_front_right_top_x, rfcbls_fill_front_right_top_y, rfcbls_fill_front_right_top_z] // 5
+    ], faces=[[0,2,1], [5,3,4], [0,1,3,5],[0,5,4,2], [1,2,4,3]]);
     
     difference() {
         union() {
+            
             polyhedron(points=[
             [rfcc_rbct_left_top_x,rfcc_rbct_left_top_y,rfcc_rbct_left_top_z], // 0
             [rfcc_rbct_left_bottom_x,rfcc_rbct_left_bottom_y,rfcc_rbct_left_bottom_z], // 1
@@ -44,12 +79,13 @@ module RacecarFrontCoverBackLeftSide() {
             [rfcbls_cover_left_x,rfcbls_cover_left_y,rfcbls_cover_left_z], // 4
             [rfcbls_cover_right_x,rfcbls_cover_right_y,rfcbls_cover_right_z] // 5         
             ], faces=[[0,4,2],[1,3,5],[0,1,5,4],[2,3,1,0], [2,4,5,3]]);
-            
+               
             translate([rfcbls_wall_x_offset,rfcbls_wall_y_offset,rfcbls_wall_z_offset]) {
                 cube([rfcbls_wall_length, rfcbls_wall_width, rfcbls_wall_height], true);
             }
             
-        }
+        }      
+        
         translate([rff_side_screw_front_x_offset, rfcbls_wall_y_offset, rfcbls_wall_z_offset]) {
             scale([1,1.001,1]) {
                 rotate([-90,0,0]) {
@@ -64,6 +100,7 @@ module RacecarFrontCoverBackLeftSide() {
                 }
             }
         }        
+        RacecarFrontCoverD455Removal();
         RacecarFrontCoverBackLeftSideText();        
     }
 }
