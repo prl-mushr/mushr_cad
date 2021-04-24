@@ -99,7 +99,7 @@ module RacecarFrontCoverBackRightSide() {
             }
         }
         RacecarFrontCoverCenterUSB();
-        RacecarFrontCoverBackRightSideText();
+        //RacecarFrontCoverBackRightSideText();
         RacecarFrontCoverD455Removal();
         translate([rfcc_d455_head_screw_x_offset, rfcc_d455_head_screw_right_y_offset, rfcc_d455_head_screw_z_offset]) {
             rotate([0,90,0]) {

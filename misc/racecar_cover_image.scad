@@ -1,11 +1,11 @@
 include <racecar_global_utils.scad>
 
-rci_dst = "../images/husky_thresholded.dxf";
-rci_x_scale = 0.35;
-rci_y_scale = 0.35;
+rci_dst = "../images/bear_thresholded.dxf";
+rci_x_scale = 0.07;
+rci_y_scale = 0.07;
 rci_height = _wall_thickness / 2.0;
-rci_x_offset = -38.0;
-rci_y_offset = -32.5;
+rci_x_offset = -45.0;
+rci_y_offset = -28;
 rci_z_offset = 0.0;
 
 if ($include_rci==undef) {
