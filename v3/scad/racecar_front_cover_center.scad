@@ -140,13 +140,13 @@ rfcc_number_y_offset = (rfcc_rbct_left_top_y+rfcc_rbct_right_top_y)/2.0;
 rfcc_number_z_offset = rfcc_rbct_left_top_z-racecar_cover_number_height/2.0+rfcc_number_extra_z;    
 
 rfcct265p_base_length = 8.0;
-rfcct265p_base_width = -2*rfcc_t265_mount_screw_right_y_offset + 2*_m3_screw_head_radius+4*_wall_thickness;//+20;
+rfcct265p_base_width = -2*rfcc_t265_mount_screw_right_y_offset + 2*_m3_screw_head_radius+4*_wall_thickness+35;//+20; //added+35 to fit D455 holes
 rfcct265p_base_height = rfcc_rbct_left_top_z-(rfcc_t265_mount_screw_z_offset-_m3_screw_shaft_radius- _wall_thickness)+24.5/2.0+_m3_screw_shaft_radius+_wall_thickness;
 rfcct265p_base_x_offset = rfcc_camera_cutout_back_left_top_x+ rfcct265p_base_length/2.0;
 rfcct265p_base_y_offset = (rfcc_rbct_left_top_y + rfcc_rbct_right_top_y)/2.0;
 rfcct265p_base_z_offset = rfcc_t265_mount_screw_z_offset-_m3_screw_shaft_radius- _wall_thickness + rfcct265p_base_height/2.0;
 
-rfcct265p_screw_z_offset = rfcct265p_base_z_offset + rfcct265p_base_height/2.0 - _wall_thickness - _m3_screw_shaft_radius;
+rfcct265p_screw_z_offset = rfcct265p_base_z_offset + rfcct265p_base_height/2.0 - _wall_thickness - _m3_screw_shaft_radius + 4; //+4 to raise t265 mounting height to fit D455
 
 /*
 rfcct265p_extra_length = rfcct265p_base_length;
@@ -193,7 +193,9 @@ module RacecarFrontCoverCenterUSB() {
     rfcc_usb_length = 10+rfcct265p_base_length;
     rfcc_usb_width = 100.0;
     rfcc_usb_height = 30.0;
-    translate([rfcc_camera_cutout_back_right_top_x+rfcc_usb_length/2.0,rfcc_camera_cutout_front_right_top_y-rfcc_usb_width/2.0,rfcc_camera_cutout_front_right_top_z+rfcc_usb_height/2.0]) {
+    
+    //the translate-y value is changed to 2.25 to make the USB hole wider to fit the D455 & T265 wire
+    translate([rfcc_camera_cutout_back_right_top_x+rfcc_usb_length/2.0,rfcc_camera_cutout_front_right_top_y-rfcc_usb_width/2.1,rfcc_camera_cutout_front_right_top_z+rfcc_usb_height/2.0]) {
         cube([rfcc_usb_length,rfcc_usb_width,rfcc_usb_height], true);
     }
 }
@@ -367,8 +369,8 @@ module RacecarFrontCoverCenterT265Plate() {
     difference() {
         union() {
             translate([rfcct265p_base_x_offset, rfcct265p_base_y_offset, rfcct265p_base_z_offset]) {
-                cube([rfcct265p_base_length, rfcct265p_base_width, rfcct265p_base_height], true);
-            }
+                cube([rfcct265p_base_length, rfcct265p_base_width, rfcct265p_base_height + 5], true);
+            } //base_height increased to fit D455 + T265
             /*
             translate([rfcct265p_extra_x_offset,rfcct265p_extra_y_offset,rfcct265p_extra_z_offset,]){
                 cube([rfcct265p_extra_length,rfcct265p_extra_width,rfcct265p_extra_height], true);
@@ -427,6 +429,20 @@ module RacecarFrontCoverCenterT265Plate() {
                 cylinder(rfcct265p_base_length, _m3_screw_shaft_radius, _m3_screw_shaft_radius, true, $fn=_fn_val);
             }
         } 
-        */      
+        */
+  
+        //d455 screwholes
+          translate([rfcc_d455_mount_screw_x_offset, rfcc_d455_mount_screw_right_y_offset, rfcc_d455_mount_screw_z_offset]) {
+            rotate([0,90,0]) {
+                cylinder(rfcc_d455_mount_screw_height+20, _m4_screw_shaft_radius, _m4_screw_shaft_radius, true, $fn=_fn_val);
+            }
+        }
+       
+        translate([rfcc_d455_mount_screw_x_offset, rfcc_d455_mount_screw_left_y_offset, rfcc_d455_mount_screw_z_offset]) {
+            rotate([0,90,0]) {
+                cylinder(rfcc_d455_mount_screw_height+20, _m4_screw_shaft_radius, _m4_screw_shaft_radius, true, $fn=_fn_val);
+            }
+        }      
+      
     }
 }
