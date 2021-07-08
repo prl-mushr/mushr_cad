@@ -5,7 +5,7 @@ racecar_cover_number_font = "Arial:style=Bold Italic";
 racecar_cover_number_size = 25.0;
 racecar_cover_number_height = _wall_thickness / 2.0;
 racecar_cover_number_x_offset = 0.0;
-racecar_cover_number_y_offset = 0.0;
+racecar_cover_number_y_offset = 15.0;
 racecar_cover_number_z_offset = 0.0;
 
 if ($include_rcn==undef) {

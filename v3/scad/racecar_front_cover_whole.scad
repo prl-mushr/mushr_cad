@@ -5,8 +5,10 @@ $include_rfcbrs = true;
 include <racecar_front_cover_back_right_side.scad>
 
 if(_print_config) {
-    translate([0,0,68]) {
-        rfcw_rotation_y = 180+atan(rfcc_top_xz_slope);
+    rfcw_rotation_y = _build_neopixel_headlight ? -90 : 180+atan(rfcc_top_xz_slope);
+    rfcw_translate_z = _build_neopixel_headlight ? 3 : 68;
+
+    translate([0,0,rfcw_translate_z]) {
         rotate([0,rfcw_rotation_y,0]) {
             RacecarFrontCoverWhole();    
         }

@@ -86,6 +86,8 @@ draw_racecar_front_cover_left_text = false;
 draw_racecar_front_cover_right_text = false;
 draw_racecar_front_cover_center_t265_plate = false;
 draw_racecar_t265 = false;
+display_headlight_assembly = true;
+display_trinket_assembly   = false;
 
 RacecarAll();
 
@@ -426,4 +428,19 @@ module RacecarAll() {
         }
     }
     
+    if (_build_neopixel_headlight) {
+        translate([rff_wrt_rcb_x_offset, rff_wrt_rcb_y_offset, rff_wrt_rcb_z_offset]) {
+            if (display_headlight_assembly) {
+                NeoPixelHeadlightAssembly();
+            }
+        }
+    }
+
+    if (_build_trinket_mcu) {
+        translate([rff_wrt_rcb_x_offset, rff_wrt_rcb_y_offset, rff_wrt_rcb_z_offset]) {
+            if (display_trinket_assembly) {
+                TrinketMcuAssembly();
+            }
+        }
+    }
 }
