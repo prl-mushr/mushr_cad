@@ -13,7 +13,12 @@ include <../../misc/racecar_cover_number.scad>
 //  visual feedback (particularly during robot startup) and illumination for RGB
 //  camera (part of Realsense D435/D435i/D455 Depth Camera) in dark environments.
 //
-//  Requires external GitHub Repository for NeoPixel Enclosure Design:
+//  See https://github.com/pfliegster/mushr-lighting-system for a detailed discussion
+//  of the lighting system components. In addition to these OpenSCAD modifications, some
+//  additional software for both the lighting controller (on Adafruit Trinket M0) and 
+//  companion ROS software package is required.
+//
+//  The Lighting System Requires external GitHub Repository for NeoPixel Enclosure Design:
 //      https://github.com/pfliegster/neopixel-enclosures  (Release Tag v0.2 or later)
 //
 //  First: Include the NeoPixel-Enclosure repository design files for headlight and/or
@@ -26,12 +31,18 @@ include <../../../neopixel-enclosures/neopixel_x8_stick_case_front.scad>
 //  Include the Trinket-M0 Enclosure repository design files for trinket mounting base:
 include <../../../trinket-m0-enclosure/trinket_m0_enclosure_elements.scad>
 //
+// Note: The lighting system components are disabled by default (the following two boolean
+//       values are set to false). If the MuSHR user would like to add the lighting system
+//       components, simply change these two booleans to 'true' as desired for your setup and
+//       re-render your OpenSCAD files or use the provided additional STL files provided in the
+//       v3/stl directory.
+//
 // Put headlight mount on top of racecar hood if 'true':
-_include_neopixel_headlight = true;
+_include_neopixel_headlight = false;
 // Add "Adafruit Trinket M0", used as light controller for NeoPixel Stick based
 //  Lightbar and/or Headlights. We add Trinket mounting provisions on underside of
 //  racecar cover with this when 'true':
-_include_trinket_mcu = true;
+_include_trinket_mcu = false;
 //
 // Decide to build Headlight, Lightbar, and Trinket MCU mounting parts **ONLY** if
 // the 'neopixel-enclosures' and 'trinket-m0-enclosure' Repositories are installed
